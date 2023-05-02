@@ -158,7 +158,7 @@ class GithubAction:
             # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
             raise ValueError('Multiline values not supported for environment variables')
 
-        if not self._append_to_file(f'{var}={val}\n', self.OUTPUT_FILE_VAR_NAME, warn=False):
+        if not self._append_to_file(f'{var}={val}\n', os.getenv(self.OUTPUT_FILE_VAR_NAME), warn=False):
             # this has been deprecated but we fall back if there is no env file
             self._command(self._file, 'set-output', val, {'name': var})
 
